@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Errors -->
+    <string name="error_network">Couldn\'t connect to fuchoquiniela.com. Check your connection.</string>
+    <string name="error_decoding">Unexpected response from the server.</string>
+    <string name="error_session_expired">Your session expired. Please sign in again.</string>
+    <string name="error_bad_credentials">Incorrect email or password.</string>
+    <string name="error_too_many">Too many attempts. Wait a moment and try again.</string>
+    <string name="error_status">Something went wrong (%1$d). Please try again.</string>
+
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="retry">Retry</string>
+    <string name="discard">Discard</string>
+    <string name="share">Share</string>
+    <string name="back">Back</string>
+    <string name="today">Today</string>
+    <string name="tomorrow">Tomorrow</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="you">You</string>
+    <string name="admin">Admin</string>
+    <string name="administrator">Administrator</string>
+    <string name="pts">pts</string>
+    <string name="live">Live</string>
+    <string name="final_">Final</string>
+    <string name="final_score">Final %1$s</string>
+    <string name="closed">Closed</string>
+    <string name="open">Open</string>
+    <string name="closes_in_min">Closes in %1$d min</string>
+    <string name="closes_in_h">Closes in %1$d h</string>
+    <string name="no_pick">No pick</string>
+    <string name="goals_of">%1$s goals</string>
+    <string name="match_closed">Match closed</string>
+    <string name="versus">%1$s vs %2$s</string>
+    <string name="points_n">%1$d points</string>
+    <string name="points_one">1 point</string>
+
+    <!-- Tabs -->
+    <string name="tab_pools">Pools</string>
+    <string name="tab_matches">Matches</string>
+    <string name="tab_table">Table</string>
+    <string name="tab_news">News</string>
+    <string name="tab_more">More</string>
+
+    <!-- Login -->
+    <string name="sign_in_title">Sign in</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="email_placeholder">you@email.com</string>
+    <string name="sign_in">Sign in</string>
+    <string name="signing_in">Signing in…</string>
+    <string name="tagline">Football pools with your friends</string>
+    <string name="lead">Predict every matchday and climb the standings.</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="no_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="show_password">Show password</string>
+    <string name="hide_password">Hide password</string>
+    <string name="enter_email_password">Enter your email and password.</string>
+
+    <!-- Pools -->
+    <string name="my_pools">My pools</string>
+    <string name="account">Account</string>
+    <string name="join_pool">Join a pool</string>
+    <string name="join">Join</string>
+    <string name="join_prompt">Paste the invite link or the pool\'s code.</string>
+    <string name="join_unrecognized">We didn\'t recognize that link or code.</string>
+    <string name="joined">You joined %1$s.</string>
+    <string name="done">Done!</string>
+    <string name="open_website">Open website</string>
+    <string name="sign_out">Sign out</string>
+    <string name="sign_out_confirm">Sign out on this device?</string>
+    <string name="no_pools_title">You\'re not in any pools yet</string>
+    <string name="no_pools_message">Create one on fuchoquiniela.com or join with the invite link someone shared with you.</string>
+    <string name="participants_one">1 participant</string>
+    <string name="participants_n">%1$d participants</string>
+    <string name="invite_friends">Invite friends</string>
+    <string name="invite_message">Join my pool “%1$s” on Fuchoquiniela:</string>
+    <string name="invite_subject">Invitation to %1$s</string>
+
+    <!-- Pool matches -->
+    <string name="to_play">To play</string>
+    <string name="all">All</string>
+    <string name="standings">Standings</string>
+    <string name="more_options">More options</string>
+    <string name="round_detail">Round detail</string>
+    <string name="information">Information</string>
+    <string name="no_open_matches">No open matches</string>
+    <string name="all_picks_in">✓ All your picks are in</string>
+    <string name="one_pick_left">1 pick left</string>
+    <string name="picks_left">%1$d picks left</string>
+    <string name="no_matches_to_play">No matches left to play</string>
+    <string name="no_matches_to_play_message">Every match this season has started. Check “All” to see results.</string>
+    <string name="no_matches">No matches</string>
+    <string name="season_no_matches">This season has no matches yet.</string>
+    <string name="saving">Saving…</string>
+    <string name="picks_saved">Picks saved</string>
+    <string name="picks">Picks</string>
+    <string name="picks_locked_rejected">Some matches already started, so those picks weren\'t saved.</string>
+    <string name="picks_rejected">Some picks couldn\'t be saved.</string>
+    <string name="picks_not_saved">Your picks weren\'t saved</string>
+
+    <!-- Standings -->
+    <string name="exact">Exact</string>
+    <string name="result">Result</string>
+    <string name="miss">Miss</string>
+    <string name="one_match_played">1 match played</string>
+    <string name="matches_played_n">%1$d matches played</string>
+    <string name="hits">%1$d exact · %2$d results</string>
+
+    <!-- Round detail -->
+    <string name="previous_round">Previous round</string>
+    <string name="next_round">Next round</string>
+    <string name="rounds">Rounds</string>
+    <string name="round_points">Round points</string>
+    <string name="others_hidden">Other players\' picks show once the match starts.</string>
+    <string name="no_matches_in_round">There are no matches in this round.</string>
+
+    <!-- Pool information -->
+    <string name="details">Details</string>
+    <string name="participants">Participants</string>
+    <string name="participants_count">Participants (%1$d)</string>
+    <string name="entry_fee">Entry fee</string>
+    <string name="created">Created</string>
+    <string name="description">Description</string>
+    <string name="code">Code</string>
+    <string name="tap_to_copy">Tap to copy</string>
+    <string name="code_copied">Code copied</string>
+    <string name="code_copied_message">Your friends can paste it in the app with the join button.</string>
+    <string name="share_invite_link">Share invite link</string>
+    <string name="share_invite_hint">Anyone who opens it can join after signing in.</string>
+    <string name="since">Since %1$s</string>
+
+    <!-- League matches -->
+    <string name="upcoming">Upcoming</string>
+    <string name="results">Results</string>
+    <string name="no_upcoming">No upcoming matches</string>
+    <string name="no_results">No results yet</string>
+    <string name="schedule_soon">Matches will show up here once the schedule is published.</string>
+
+    <!-- League table -->
+    <string name="liga_mx">Liga MX</string>
+    <string name="simulator">Simulator</string>
+    <string name="table_summary">%1$d of %2$d matches played. The top %3$d reach the playoffs (Liguilla).</string>
+    <string name="table_legend">P: played · W/D/L: won, drawn, lost · GD: goal difference. The green bar marks the playoff (Liguilla) places.</string>
+    <string name="no_tournament">No active tournament</string>
+    <string name="table_soon">The table will appear when the next Liga MX tournament starts.</string>
+    <string name="col_team">Team</string>
+    <string name="col_played">P</string>
+    <string name="col_won">W</string>
+    <string name="col_drawn">D</string>
+    <string name="col_lost">L</string>
+    <string name="col_diff">GD</string>
+    <string name="col_points">PTS</string>
+    <string name="place_points">Place %1$d · %2$d pts</string>
+    <string name="playoff_zone">Playoff zone</string>
+    <string name="outside_playoffs">Outside the playoffs</string>
+    <string name="overall">Overall</string>
+    <string name="home">Home</string>
+    <string name="away">Away</string>
+    <string name="record">%1$dW %2$dD %3$dL</string>
+    <string name="goals_record">Goals %1$d-%2$d</string>
+    <string name="no_games_yet">No matches played this tournament yet.</string>
+    <string name="vs_rival">vs %1$s</string>
+    <string name="won">Won</string>
+    <string name="drew">Drew</string>
+    <string name="lost">Lost</string>
+    <string name="form_win">W</string>
+    <string name="form_draw">D</string>
+    <string name="form_loss">L</string>
+
+    <!-- News -->
+    <string name="no_news">No news yet</string>
+    <string name="no_news_message">Check back soon for analysis and news on every matchday.</string>
+    <string name="by_author">By %1$s</string>
+    <string name="read_full_story">Read the full story</string>
+
+    <!-- More -->
+    <string name="section_site">Fuchoquiniela</string>
+    <string name="help">Help</string>
+    <string name="preferences">Preferences</string>
+    <string name="playoff_simulator">Playoff simulator</string>
+    <string name="playoff_simulator_subtitle">Simulate the remaining matches and see how the table would end up.</string>
+    <string name="how_to_use">How to use the app</string>
+    <string name="contact">Contact</string>
+    <string name="about">About</string>
+    <string name="website">Website</string>
+    <string name="terms">Terms and conditions</string>
+    <string name="privacy">Privacy policy</string>
+    <string name="language">Language</string>
+    <string name="language_footer">Choose Spanish or English in Settings. News and tournament names are shown as they appear on the website.</string>
+    <string name="my_account">My account</string>
+    <string name="version_footer">Fuchoquiniela for Android %1$s (%2$d)</string>
+    <string name="language_name">English</string>
+
+    <!-- Help -->
+    <string name="how_it_works">How it works</string>
+    <string name="points">Points</string>
+    <string name="faq">FAQ</string>
+    <string name="need_help">Need help?</string>
+    <string name="email_us">Email us</string>
+    <string name="step1_title">Join a pool</string>
+    <string name="step1_text">Tap the join button in Pools and paste the invite link or code you were sent. Pools are created on fuchoquiniela.com.</string>
+    <string name="step2_title">Make your picks</string>
+    <string name="step2_text">Open the pool and use − and + to set each match\'s score. Picks save automatically: you\'ll see “Picks saved” at the bottom.</string>
+    <string name="step3_title">Before kickoff</string>
+    <string name="step3_text">You can change a pick as often as you like until kickoff. Then the match closes.</string>
+    <string name="step4_title">Climb the standings</string>
+    <string name="step4_text">Points are added when each match ends. Check Standings inside your pool.</string>
+    <string name="rule_exact">Exact score</string>
+    <string name="rule_exact_example">You picked 2-1 and it ended 2-1</string>
+    <string name="rule_result_example">You picked 1-0 and it ended 3-1</string>
+    <string name="rule_miss_example">You picked 1-1 and it ended 0-2</string>
+    <string name="faq1_q">How do I create a pool?</string>
+    <string name="faq1_a">For now, pools are created on fuchoquiniela.com: pick a name and a season. It then shows up here under Pools, and you can share it with your friends.</string>
+    <string name="faq2_q">How do I invite my friends?</string>
+    <string name="faq2_a">Open your pool, tap ⋮ › Invite friends (or touch and hold the pool in the list), then share the link by WhatsApp, message or email. Your friends open it, or paste it in the app with the join button.</string>
+    <string name="faq3_q">Why can\'t I change a match?</string>
+    <string name="faq3_a">Picks close at kickoff. Closed matches show a lock and no longer have buttons.</string>
+    <string name="faq4_q">What do “To play” and “All” mean?</string>
+    <string name="faq4_a">“To play” shows only the matches you can still pick. “All” includes closed matches and the season\'s results.</string>
+    <string name="faq5_q">Can I see other players\' picks?</string>
+    <string name="faq5_a">Yes: in your pool, tap ⋮ › Round detail. You\'ll see everyone\'s picks and points for each match once it starts; before that, only yours.</string>
+    <string name="faq6_q">What happens if there\'s a tie in the standings?</string>
+    <string name="faq6_a">Whoever has more exact scores ranks higher.</string>
+    <string name="faq7_q">How often are results updated?</string>
+    <string name="faq7_a">Usually a few minutes after each match ends; in rare cases, the next day. Pull down on any list to refresh it.</string>
+    <string name="faq8_q">How does the simulator work?</string>
+    <string name="faq8_a">Enter or randomize the scores of the remaining matches and see how the Liga MX table would end up. The simulation is only saved on your phone and doesn\'t count toward your pools.</string>
+    <string name="faq9_q">How do I change the language?</string>
+    <string name="faq9_a">The app is in Spanish and English and follows your phone\'s language. On Android 13 or later you can change it just for this app in More › Language.</string>
+    <string name="faq10_q">I forgot my password</string>
+    <string name="faq10_a">On the sign-in screen, tap “Forgot your password?”. We\'ll email you a link to create a new one; it\'s valid for one hour.</string>
+
+    <!-- Simulator -->
+    <string name="random_results">Random results</string>
+    <string name="clear_simulation">Clear simulation</string>
+    <string name="simulator_options">Simulator options</string>
+    <string name="no_matches_left">There are no matches left to play.</string>
+    <string name="simulated_count">%1$d of %2$d matches simulated</string>
+    <string name="simulator_soon">The simulator will be available when the next Liga MX tournament starts.</string>
+    <string name="season_finished">Regular season finished</string>
+    <string name="season_finished_message">All matches have been played. Check the final table.</string>
+</resources>

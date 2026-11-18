@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Spanish is the default language, English the translation (values-en). Keep both in sync,
+     and in sync with the iOS app's Localizable.xcstrings. Server text (API errors, round and
+     tournament names, news) is not translated. -->
+<resources>
+    <string name="app_name" translatable="false">Fuchoquiniela</string>
+
+    <!-- Errors -->
+    <string name="error_network">No se pudo conectar con fuchoquiniela.com. Revisa tu conexión.</string>
+    <string name="error_decoding">Respuesta inesperada del servidor.</string>
+    <string name="error_session_expired">Tu sesión expiró. Inicia sesión de nuevo.</string>
+    <string name="error_bad_credentials">Datos de acceso incorrectos.</string>
+    <string name="error_too_many">Demasiados intentos. Espera un momento e intenta de nuevo.</string>
+    <string name="error_status">Ocurrió un error (%1$d). Intenta de nuevo.</string>
+
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancelar</string>
+    <string name="retry">Reintentar</string>
+    <string name="discard">Descartar</string>
+    <string name="share">Compartir</string>
+    <string name="back">Atrás</string>
+    <string name="today">Hoy</string>
+    <string name="tomorrow">Mañana</string>
+    <string name="yesterday">Ayer</string>
+    <string name="you">Tú</string>
+    <string name="admin">Admin</string>
+    <string name="administrator">Administrador</string>
+    <string name="pts">pts</string>
+    <string name="live">En vivo</string>
+    <string name="final_">Final</string>
+    <string name="final_score">Final %1$s</string>
+    <string name="closed">Cerrado</string>
+    <string name="open">Abierto</string>
+    <string name="closes_in_min">Cierra en %1$d min</string>
+    <string name="closes_in_h">Cierra en %1$d h</string>
+    <string name="no_pick">Sin pronóstico</string>
+    <string name="goals_of">Goles de %1$s</string>
+    <string name="match_closed">Partido cerrado</string>
+    <string name="versus">%1$s contra %2$s</string>
+    <string name="points_n">%1$d puntos</string>
+    <string name="points_one">1 punto</string>
+
+    <!-- Tabs -->
+    <string name="tab_pools">Quinielas</string>
+    <string name="tab_matches">Partidos</string>
+    <string name="tab_table">Tabla</string>
+    <string name="tab_news">Noticias</string>
+    <string name="tab_more">Más</string>
+
+    <!-- Login -->
+    <string name="sign_in_title">Iniciar sesión</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="email_placeholder">tu@email.com</string>
+    <string name="sign_in">Entrar</string>
+    <string name="signing_in">Entrando…</string>
+    <string name="tagline">Quinielas de fútbol con tus amigos</string>
+    <string name="lead">Haz tus pronósticos de cada jornada y compite en la tabla de posiciones.</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="no_account">¿No tienes cuenta?</string>
+    <string name="sign_up">Regístrate</string>
+    <string name="show_password">Mostrar contraseña</string>
+    <string name="hide_password">Ocultar contraseña</string>
+    <string name="enter_email_password">Escribe tu email y contraseña.</string>
+
+    <!-- Pools -->
+    <string name="my_pools">Mis quinielas</string>
+    <string name="account">Cuenta</string>
+    <string name="join_pool">Unirme a una quiniela</string>
+    <string name="join">Unirme</string>
+    <string name="join_prompt">Pega el enlace de invitación o el código de la quiniela.</string>
+    <string name="join_unrecognized">No reconocimos ese enlace o código.</string>
+    <string name="joined">Te uniste a %1$s.</string>
+    <string name="done">¡Listo!</string>
+    <string name="open_website">Abrir sitio web</string>
+    <string name="sign_out">Cerrar sesión</string>
+    <string name="sign_out_confirm">¿Cerrar sesión en este dispositivo?</string>
+    <string name="no_pools_title">Aún no tienes quinielas</string>
+    <string name="no_pools_message">Crea una en fuchoquiniela.com o únete con el enlace de invitación que te compartieron.</string>
+    <string name="participants_one">1 participante</string>
+    <string name="participants_n">%1$d participantes</string>
+    <string name="invite_friends">Invitar amigos</string>
+    <string name="invite_message">Únete a mi quiniela «%1$s» en Fuchoquiniela:</string>
+    <string name="invite_subject">Invitación a %1$s</string>
+
+    <!-- Pool matches -->
+    <string name="to_play">Por jugar</string>
+    <string name="all">Todos</string>
+    <string name="standings">Posiciones</string>
+    <string name="more_options">Más opciones</string>
+    <string name="round_detail">Detalle por ronda</string>
+    <string name="information">Información</string>
+    <string name="no_open_matches">No hay partidos abiertos</string>
+    <string name="all_picks_in">✓ Tienes todos tus pronósticos</string>
+    <string name="one_pick_left">Te falta 1 pronóstico</string>
+    <string name="picks_left">Te faltan %1$d pronósticos</string>
+    <string name="no_matches_to_play">No hay partidos por jugar</string>
+    <string name="no_matches_to_play_message">Ya comenzaron todos los partidos de la temporada. Revisa \"Todos\" para ver resultados.</string>
+    <string name="no_matches">Sin partidos</string>
+    <string name="season_no_matches">Esta temporada todavía no tiene partidos.</string>
+    <string name="saving">Guardando…</string>
+    <string name="picks_saved">Pronósticos guardados</string>
+    <string name="picks">Pronósticos</string>
+    <string name="picks_locked_rejected">Algunos partidos ya comenzaron y no se guardaron esos pronósticos.</string>
+    <string name="picks_rejected">Algunos pronósticos no se pudieron guardar.</string>
+    <string name="picks_not_saved">No se guardaron tus pronósticos</string>
+
+    <!-- Standings -->
+    <string name="exact">Exacto</string>
+    <string name="result">Resultado</string>
+    <string name="miss">Fallo</string>
+    <string name="one_match_played">1 partido jugado</string>
+    <string name="matches_played_n">%1$d partidos jugados</string>
+    <string name="hits">%1$d exactos · %2$d resultados</string>
+
+    <!-- Round detail -->
+    <string name="previous_round">Ronda anterior</string>
+    <string name="next_round">Ronda siguiente</string>
+    <string name="rounds">Rondas</string>
+    <string name="round_points">Puntos de la ronda</string>
+    <string name="others_hidden">Los pronósticos de los demás se ven cuando empieza el partido.</string>
+    <string name="no_matches_in_round">No hay partidos en esta ronda.</string>
+
+    <!-- Pool information -->
+    <string name="details">Detalles</string>
+    <string name="participants">Participantes</string>
+    <string name="participants_count">Participantes (%1$d)</string>
+    <string name="entry_fee">Cooperación</string>
+    <string name="created">Creada</string>
+    <string name="description">Descripción</string>
+    <string name="code">Código</string>
+    <string name="tap_to_copy">Toca para copiar</string>
+    <string name="code_copied">Código copiado</string>
+    <string name="code_copied_message">Tus amigos lo pueden pegar en la app con el botón para unirse.</string>
+    <string name="share_invite_link">Compartir enlace de invitación</string>
+    <string name="share_invite_hint">Quien lo abra podrá unirse después de iniciar sesión.</string>
+    <string name="since">Desde el %1$s</string>
+
+    <!-- League matches -->
+    <string name="upcoming">Próximos</string>
+    <string name="results">Resultados</string>
+    <string name="no_upcoming">No hay partidos próximos</string>
+    <string name="no_results">Aún no hay resultados</string>
+    <string name="schedule_soon">Cuando se publique el calendario aparecerá aquí.</string>
+
+    <!-- League table -->
+    <string name="liga_mx">Liga MX</string>
+    <string name="simulator">Simulador</string>
+    <string name="table_summary">%1$d de %2$d partidos jugados. Los primeros %3$d van a la Liguilla.</string>
+    <string name="table_legend">PJ: jugados · G/E/P: ganados, empatados, perdidos · DG: diferencia de goles. La barra verde marca la zona de Liguilla.</string>
+    <string name="no_tournament">No hay torneo activo</string>
+    <string name="table_soon">La tabla aparecerá cuando empiece el próximo torneo de Liga MX.</string>
+    <string name="col_team">Equipo</string>
+    <string name="col_played">PJ</string>
+    <string name="col_won">G</string>
+    <string name="col_drawn">E</string>
+    <string name="col_lost">P</string>
+    <string name="col_diff">DG</string>
+    <string name="col_points">PTS</string>
+    <string name="place_points">Lugar %1$d · %2$d pts</string>
+    <string name="playoff_zone">Zona de Liguilla</string>
+    <string name="outside_playoffs">Fuera de Liguilla</string>
+    <string name="overall">General</string>
+    <string name="home">Local</string>
+    <string name="away">Visita</string>
+    <string name="record">%1$dG %2$dE %3$dP</string>
+    <string name="goals_record">Goles %1$d-%2$d</string>
+    <string name="no_games_yet">Todavía no juega partidos este torneo.</string>
+    <string name="vs_rival">vs %1$s</string>
+    <string name="won">Ganó</string>
+    <string name="drew">Empató</string>
+    <string name="lost">Perdió</string>
+    <string name="form_win">G</string>
+    <string name="form_draw">E</string>
+    <string name="form_loss">P</string>
+
+    <!-- News -->
+    <string name="no_news">Sin noticias por ahora</string>
+    <string name="no_news_message">Vuelve pronto para leer análisis y novedades de cada jornada.</string>
+    <string name="by_author">Por %1$s</string>
+    <string name="read_full_story">Leer la nota completa</string>
+
+    <!-- More -->
+    <string name="section_site">Fuchoquiniela</string>
+    <string name="help">Ayuda</string>
+    <string name="preferences">Preferencias</string>
+    <string name="playoff_simulator">Simulador de Liguilla</string>
+    <string name="playoff_simulator_subtitle">Simula los partidos que faltan y mira cómo quedaría la tabla.</string>
+    <string name="how_to_use">Cómo usar la app</string>
+    <string name="contact">Contacto</string>
+    <string name="about">Acerca de</string>
+    <string name="website">Sitio web</string>
+    <string name="terms">Términos y condiciones</string>
+    <string name="privacy">Aviso de privacidad</string>
+    <string name="language">Idioma</string>
+    <string name="language_footer">Elige español o inglés en Ajustes. Las noticias y los nombres de torneos se muestran como en el sitio.</string>
+    <string name="my_account">Mi cuenta</string>
+    <string name="version_footer">Fuchoquiniela para Android %1$s (%2$d)</string>
+    <string name="language_name">Español</string>
+
+    <!-- Help -->
+    <string name="how_it_works">Cómo funciona</string>
+    <string name="points">Puntos</string>
+    <string name="faq">Preguntas frecuentes</string>
+    <string name="need_help">¿Necesitas ayuda?</string>
+    <string name="email_us">Escríbenos</string>
+    <string name="step1_title">Únete a una quiniela</string>
+    <string name="step1_text">Toca el botón para unirte en Quinielas y pega el enlace de invitación o el código que te compartieron. Las quinielas se crean en fuchoquiniela.com.</string>
+    <string name="step2_title">Haz tus pronósticos</string>
+    <string name="step2_text">Abre la quiniela y usa − y + para el marcador de cada partido. Se guardan solos: verás «Pronósticos guardados» abajo.</string>
+    <string name="step3_title">Antes de que empiece el partido</string>
+    <string name="step3_text">Puedes cambiar un pronóstico las veces que quieras hasta la hora de inicio. Después el partido se cierra.</string>
+    <string name="step4_title">Sube en la tabla</string>
+    <string name="step4_text">Cuando termina cada partido se suman los puntos. Revisa Posiciones dentro de tu quiniela.</string>
+    <string name="rule_exact">Marcador exacto</string>
+    <string name="rule_exact_example">Pronosticaste 2-1 y quedó 2-1</string>
+    <string name="rule_result_example">Pronosticaste 1-0 y quedó 3-1</string>
+    <string name="rule_miss_example">Pronosticaste 1-1 y quedó 0-2</string>
+    <string name="faq1_q">¿Cómo creo una quiniela?</string>
+    <string name="faq1_a">Por ahora se crean en fuchoquiniela.com: elige un nombre y una temporada. Después aparece aquí, en Quinielas, y la puedes compartir con tus amigos.</string>
+    <string name="faq2_q">¿Cómo invito a mis amigos?</string>
+    <string name="faq2_a">Abre tu quiniela, toca ⋮ › Invitar amigos (o mantén presionada la quiniela en la lista) y comparte el enlace por WhatsApp, mensaje o correo. Tus amigos lo abren o lo pegan en la app con el botón para unirse.</string>
+    <string name="faq3_q">¿Por qué no puedo cambiar un partido?</string>
+    <string name="faq3_a">Los pronósticos se cierran a la hora de inicio del partido. Los partidos cerrados muestran el candado y ya no tienen botones.</string>
+    <string name="faq4_q">¿Qué significan «Por jugar» y «Todos»?</string>
+    <string name="faq4_a">«Por jugar» muestra solo los partidos que todavía puedes pronosticar. «Todos» incluye los cerrados y los resultados de la temporada.</string>
+    <string name="faq5_q">¿Puedo ver los pronósticos de los demás?</string>
+    <string name="faq5_a">Sí, en tu quiniela toca ⋮ › Detalle por ronda. Verás los pronósticos de todos y los puntos de cada partido en cuanto empieza; antes solo ves el tuyo.</string>
+    <string name="faq6_q">¿Qué pasa si hay empate en la tabla?</string>
+    <string name="faq6_a">Queda arriba quien tenga más marcadores exactos.</string>
+    <string name="faq7_q">¿Cada cuánto se actualizan los resultados?</string>
+    <string name="faq7_a">Normalmente unos minutos después de que termina cada partido; en casos extraordinarios, al día siguiente. Desliza hacia abajo en cualquier lista para actualizarla.</string>
+    <string name="faq8_q">¿Cómo funciona el simulador?</string>
+    <string name="faq8_a">Escribe o genera al azar los marcadores de los partidos que faltan y mira cómo quedaría la tabla de Liga MX. La simulación solo se guarda en tu teléfono y no cuenta para tus quinielas.</string>
+    <string name="faq9_q">¿Cómo cambio el idioma?</string>
+    <string name="faq9_a">La app está en español e inglés y sigue el idioma de tu teléfono. En Android 13 o posterior puedes cambiarlo solo para esta app en Más › Idioma.</string>
+    <string name="faq10_q">Olvidé mi contraseña</string>
+    <string name="faq10_a">En la pantalla de inicio toca «¿Olvidaste tu contraseña?». Te enviaremos un enlace para crear una nueva; es válido durante una hora.</string>
+
+    <!-- Simulator -->
+    <string name="random_results">Resultados aleatorios</string>
+    <string name="clear_simulation">Borrar simulación</string>
+    <string name="simulator_options">Opciones del simulador</string>
+    <string name="no_matches_left">Ya no quedan partidos por jugar.</string>
+    <string name="simulated_count">%1$d de %2$d partidos simulados</string>
+    <string name="simulator_soon">El simulador estará disponible cuando empiece el próximo torneo de Liga MX.</string>
+    <string name="season_finished">Fase regular terminada</string>
+    <string name="season_finished_message">Ya se jugaron todos los partidos. Revisa la tabla final.</string>
+</resources>
