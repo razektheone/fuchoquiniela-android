@@ -69,7 +69,21 @@ object FuchoApi {
         coerceInputValues = true
     }
 
-    private val client = OkHttpClient.Builder()
+    /**
+     * Names the app on every request. Some hosts refuse generic clients: Wikimedia, where most
+     * news images live, answers 403 to OkHttp's default "okhttp/x.y" (its User-Agent policy).
+     */
+    val userAgent: String =
+        "Fuchoquiniela/${BuildConfig.VERSION_NAME} (Android ${Build.VERSION.RELEASE}; +$SITE_URL)"
+
+    /** Shared by the API and the image loader (see FuchoApp). */
+    val httpClient: OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor { chain ->
+            chain.proceed(chain.request().newBuilder().header("User-Agent", userAgent).build())
+        }
+        .build()
+
+    private val client = httpClient.newBuilder()
         .callTimeout(20, TimeUnit.SECONDS)
         .build()
 
