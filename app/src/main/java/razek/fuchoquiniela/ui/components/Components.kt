@@ -86,6 +86,23 @@ import razek.fuchoquiniela.ui.theme.Spacing
 
 val CardShape = RoundedCornerShape(12.dp)
 
+/** Widest a screen's content gets, like the iOS app's readable width on iPad. */
+val MaxContentWidth = 680.dp
+
+/**
+ * Extra side margin that keeps content at [MaxContentWidth] on tablets; 0 on phones. Set once in
+ * AppRoot from the space next to the navigation. Lists add it to their content padding (rather
+ * than narrowing the list), so the whole screen still scrolls.
+ */
+val LocalSideInset = androidx.compose.runtime.compositionLocalOf { 0.dp }
+
+/** The usual 16dp gutter plus [LocalSideInset]. */
+val gutter: Dp
+    @Composable get() = Spacing.l + LocalSideInset.current
+
+/** Side margin that centers [MaxContentWidth] of content (plus 16dp gutters) in [width]. */
+fun sideInsetFor(width: Dp): Dp = ((width - MaxContentWidth - Spacing.l * 2) / 2).coerceAtLeast(0.dp)
+
 /** Rounded panel with the web's card color and hairline border. */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -379,7 +396,7 @@ fun GroupedSection(
     footer: String? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    Column(modifier.fillMaxWidth().padding(horizontal = Spacing.l)) {
+    Column(modifier.fillMaxWidth().padding(horizontal = gutter)) {
         if (title != null) {
             Text(
                 title.uppercase(),

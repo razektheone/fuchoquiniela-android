@@ -91,6 +91,7 @@ import razek.fuchoquiniela.ui.components.EmptyState
 import razek.fuchoquiniela.ui.components.FilterBar
 import razek.fuchoquiniela.ui.components.FuchoCard
 import razek.fuchoquiniela.ui.components.FuchoTopBar
+import razek.fuchoquiniela.ui.components.gutter
 import razek.fuchoquiniela.ui.components.LoadingBox
 import razek.fuchoquiniela.ui.components.MAX_GOALS
 import razek.fuchoquiniela.ui.components.SectionHeader
@@ -370,7 +371,7 @@ fun PoolMatchesScreen(
                         else -> LazyColumn(
                             state = listState,
                             // Room for the floating save status.
-                            contentPadding = PaddingValues(start = Spacing.l, end = Spacing.l, bottom = 72.dp),
+                            contentPadding = PaddingValues(start = gutter, end = gutter, bottom = 72.dp),
                             modifier = Modifier.fillMaxSize(),
                         ) {
                             sections.forEachIndexed { index, (round, list) ->

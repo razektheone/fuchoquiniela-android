@@ -90,6 +90,7 @@ import razek.fuchoquiniela.ui.components.EmptyState
 import razek.fuchoquiniela.ui.components.FilterBar
 import razek.fuchoquiniela.ui.components.FuchoCard
 import razek.fuchoquiniela.ui.components.FuchoTopBar
+import razek.fuchoquiniela.ui.components.gutter
 import razek.fuchoquiniela.ui.components.GroupedSection
 import razek.fuchoquiniela.ui.components.LeagueTableHeader
 import razek.fuchoquiniela.ui.components.LeagueTableRow
@@ -191,7 +192,7 @@ fun LeagueMatchesScreen() {
                     )
                     else -> LazyColumn(
                         state = listState,
-                        contentPadding = PaddingValues(start = Spacing.l, end = Spacing.l, bottom = Spacing.xl),
+                        contentPadding = PaddingValues(start = gutter, end = gutter, bottom = Spacing.xl),
                         modifier = Modifier.fillMaxSize(),
                     ) {
                         days.forEach { (day: LocalDate, list) ->
@@ -334,7 +335,7 @@ fun LeagueTableScreen(onSimulator: () -> Unit) {
                     val wide = maxWidth.value >= WIDE_TABLE_DP
                     LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(bottom = Spacing.xl)) {
                         item {
-                            GroupedSection(stringResource(R.string.liga_mx), Modifier.widthIn(max = 720.dp)) {
+                            GroupedSection(stringResource(R.string.liga_mx)) {
                                 ListRow(
                                     response.season.title,
                                     subtitle = stringResource(R.string.table_summary, response.finishedMatches, response.totalMatches, response.qualified),
@@ -590,7 +591,7 @@ fun SimulatorScreen(onBack: () -> Unit) {
                 )
             } else {
                 LazyColumn(
-                    contentPadding = PaddingValues(start = Spacing.l, end = Spacing.l, bottom = Spacing.xl),
+                    contentPadding = PaddingValues(start = gutter, end = gutter, bottom = Spacing.xl),
                     modifier = Modifier.fillMaxSize(),
                 ) {
                     response.rounds.forEach { round ->

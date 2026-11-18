@@ -2,7 +2,28 @@ package razek.fuchoquiniela.ui
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.Alignment
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.material3.NavigationRail
+import androidx.compose.material3.NavigationRailItem
+import androidx.compose.material3.NavigationRailItemDefaults
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.unit.dp
+import razek.fuchoquiniela.ui.components.LocalSideInset
+import razek.fuchoquiniela.ui.components.LogoMark
+import razek.fuchoquiniela.ui.components.sideInsetFor
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.consumeWindowInsets
@@ -99,6 +120,8 @@ private fun MainNavigation(pendingJoin: String?, onJoinHandled: () -> Unit) {
     val entry by nav.currentBackStackEntryAsState()
     val route = entry?.destination?.route
     val showTabs = Tab.entries.any { it.route == route }
+    // Tablets and phones in landscape: tabs in a side rail instead of the bottom bar.
+    val wide = LocalConfiguration.current.screenWidthDp >= 600
 
     Scaffold(
         containerColor = FuchoColors.background,
@@ -106,7 +129,7 @@ private fun MainNavigation(pendingJoin: String?, onJoinHandled: () -> Unit) {
         // navigation bars (the tab bar already covers the navigation bar when it's shown).
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = {
-            if (showTabs) {
+            if (showTabs && !wide) {
                 NavigationBar(containerColor = FuchoColors.chrome) {
                     Tab.entries.forEach { tab ->
                         val selected = route == tab.route
@@ -128,7 +151,17 @@ private fun MainNavigation(pendingJoin: String?, onJoinHandled: () -> Unit) {
             }
         },
     ) { padding ->
-        Box(Modifier.fillMaxSize().padding(bottom = padding.calculateBottomPadding()).consumeWindowInsets(padding)) {
+        Row(Modifier.fillMaxSize().padding(bottom = padding.calculateBottomPadding()).consumeWindowInsets(padding)) {
+            val railShown = showTabs && wide
+            if (railShown) TabRail(route) { nav.selectTab(it) }
+            BoxWithConstraints(
+                Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    // The rail already covers the start-side system bar (landscape navigation bar).
+                    .then(if (railShown) Modifier.consumeWindowInsets(WindowInsets.systemBars.only(WindowInsetsSides.Start)) else Modifier),
+            ) {
+            CompositionLocalProvider(LocalSideInset provides sideInsetFor(maxWidth)) {
             NavHost(nav, startDestination = Tab.Pools.route) {
                 composable(Tab.Pools.route) {
                     PoolsScreen(
@@ -182,6 +215,47 @@ private fun MainNavigation(pendingJoin: String?, onJoinHandled: () -> Unit) {
                 composable("simulator") { SimulatorScreen(onBack = { nav.popBackStack() }) }
                 composable("help") { HelpScreen(onBack = { nav.popBackStack() }) }
             }
+            }
+            }
+        }
+    }
+}
+
+/** The tabs as a side rail on tablets and landscape, with the logo on top. */
+@Composable
+private fun TabRail(route: String?, onSelect: (String) -> Unit) {
+    // Phones in landscape are only ~400dp tall: no logo or extra spacing there, and the
+    // items scroll if they still don't fit.
+    val tall = LocalConfiguration.current.screenHeightDp >= 560
+    NavigationRail(
+        containerColor = FuchoColors.chrome,
+        header = if (tall) {
+            { Box(Modifier.padding(vertical = 12.dp)) { LogoMark(40.dp) } }
+        } else {
+            null
+        },
+    ) {
+        Column(
+            Modifier.fillMaxHeight().verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(if (tall) 8.dp else 0.dp, Alignment.CenterVertically),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+        Tab.entries.forEach { tab ->
+            val selected = route == tab.route
+            NavigationRailItem(
+                selected = selected,
+                onClick = { onSelect(tab.route) },
+                icon = { Icon(if (selected) tab.selectedIcon else tab.icon, null) },
+                label = { Text(stringResource(tab.title)) },
+                colors = NavigationRailItemDefaults.colors(
+                    selectedIconColor = FuchoColors.accent,
+                    selectedTextColor = FuchoColors.accent,
+                    unselectedIconColor = FuchoColors.textMuted,
+                    unselectedTextColor = FuchoColors.textMuted,
+                    indicatorColor = FuchoColors.accent.copy(alpha = 0.14f),
+                ),
+            )
+        }
         }
     }
 }

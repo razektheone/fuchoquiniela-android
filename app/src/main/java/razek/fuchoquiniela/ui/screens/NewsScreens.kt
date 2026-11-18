@@ -63,6 +63,7 @@ import razek.fuchoquiniela.ui.components.AlertState
 import razek.fuchoquiniela.ui.components.EmptyState
 import razek.fuchoquiniela.ui.components.FuchoCard
 import razek.fuchoquiniela.ui.components.FuchoTopBar
+import razek.fuchoquiniela.ui.components.gutter
 import razek.fuchoquiniela.ui.components.LoadingBox
 import razek.fuchoquiniela.ui.components.openWeb
 import razek.fuchoquiniela.ui.rememberLoader
@@ -128,7 +129,7 @@ fun NewsScreen(onOpenPost: (Int) -> Unit) {
                 )
                 else -> LazyColumn(
                     state = listState,
-                    contentPadding = PaddingValues(Spacing.l),
+                    contentPadding = PaddingValues(horizontal = gutter, vertical = Spacing.l),
                     verticalArrangement = Arrangement.spacedBy(Spacing.l),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.fillMaxSize(),

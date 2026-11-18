@@ -73,6 +73,7 @@ import razek.fuchoquiniela.ui.components.BadgeStyle
 import razek.fuchoquiniela.ui.components.EmptyState
 import razek.fuchoquiniela.ui.components.FuchoCard
 import razek.fuchoquiniela.ui.components.FuchoTopBar
+import razek.fuchoquiniela.ui.components.gutter
 import razek.fuchoquiniela.ui.components.LoadingBox
 import razek.fuchoquiniela.ui.components.openSite
 import razek.fuchoquiniela.ui.components.shareInvite
@@ -190,7 +191,7 @@ fun PoolsScreen(pendingJoin: String?, onJoinHandled: () -> Unit, onOpenPool: (Po
                     onAction = { joinText = "" },
                 )
                 else -> LazyColumn(
-                    contentPadding = PaddingValues(start = Spacing.l, end = Spacing.l, top = Spacing.s, bottom = Spacing.xl),
+                    contentPadding = PaddingValues(start = gutter, end = gutter, top = Spacing.s, bottom = Spacing.xl),
                     verticalArrangement = Arrangement.spacedBy(Spacing.m),
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.CenterHorizontally,

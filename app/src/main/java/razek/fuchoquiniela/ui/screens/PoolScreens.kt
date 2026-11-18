@@ -88,6 +88,7 @@ import razek.fuchoquiniela.ui.components.EmptyState
 import razek.fuchoquiniela.ui.components.FilterBar
 import razek.fuchoquiniela.ui.components.FuchoCard
 import razek.fuchoquiniela.ui.components.FuchoTopBar
+import razek.fuchoquiniela.ui.components.gutter
 import razek.fuchoquiniela.ui.components.GroupedSection
 import razek.fuchoquiniela.ui.components.ListRow
 import razek.fuchoquiniela.ui.components.LoadingBox
@@ -125,7 +126,7 @@ fun StandingsScreen(pool: Pool, onBack: () -> Unit) {
                 return@PullToRefreshBox
             }
             LazyColumn(
-                contentPadding = PaddingValues(Spacing.l),
+                contentPadding = PaddingValues(horizontal = gutter, vertical = Spacing.l),
                 verticalArrangement = Arrangement.spacedBy(Spacing.s),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxSize(),
@@ -353,7 +354,7 @@ private fun RoundDetailList(response: RoundDetailResponse) {
         }
         response.matches.forEach { match ->
             item(key = "match-${match.id}") {
-                Column(Modifier.padding(horizontal = Spacing.l)) {
+                Column(Modifier.padding(horizontal = gutter)) {
                     RoundMatchHeader(match)
                     Column(Modifier.fillMaxWidth().clip(CardShape).background(FuchoColors.card)) {
                         if (match.locked) {
