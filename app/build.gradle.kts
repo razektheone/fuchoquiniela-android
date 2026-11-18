@@ -20,17 +20,24 @@ android {
 
         // Same backend as the iOS app.
         buildConfigField("String", "API_BASE_URL", "\"https://www.fuchoquiniela.com/api/v1\"")
+        buildConfigField("String", "TEST_EMAIL", "\"\"")
+        buildConfigField("String", "TEST_PASSWORD", "\"\"")
     }
 
     buildTypes {
         debug {
+            val local = rootProject.file("local.properties").takeIf { it.exists() }
+                ?.let { file -> Properties().apply { file.inputStream().use { load(it) } } }
             // Debug builds can talk to the local fuchito Docker setup: put
             // fucho.apiBaseUrl=http://10.0.2.2:50800/api/v1 in local.properties
             // (10.0.2.2 is the emulator's alias for the host's localhost).
-            val localUrl = rootProject.file("local.properties").takeIf { it.exists() }
-                ?.let { file -> Properties().apply { file.inputStream().use { load(it) } } }
-                ?.getProperty("fucho.apiBaseUrl")
-            if (localUrl != null) buildConfigField("String", "API_BASE_URL", "\"$localUrl\"")
+            local?.getProperty("fucho.apiBaseUrl")?.let { buildConfigField("String", "API_BASE_URL", "\"$it\"") }
+            // Only together with a local API: the login form starts filled with the local test user
+            // (fucho.testEmail / fucho.testPassword), so testing on an emulator needs no typing.
+            if (local?.getProperty("fucho.apiBaseUrl") != null) {
+                local.getProperty("fucho.testEmail")?.let { buildConfigField("String", "TEST_EMAIL", "\"$it\"") }
+                local.getProperty("fucho.testPassword")?.let { buildConfigField("String", "TEST_PASSWORD", "\"$it\"") }
+            }
         }
         release {
             isMinifyEnabled = true

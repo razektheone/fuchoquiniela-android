@@ -62,6 +62,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
+import razek.fuchoquiniela.BuildConfig
 import razek.fuchoquiniela.R
 import razek.fuchoquiniela.data.ApiError
 import razek.fuchoquiniela.data.FuchoApi
@@ -92,8 +93,9 @@ fun LoginScreen(message: String?, onMessageShown: () -> Unit) {
     val alerts = remember { AlertState() }
     val title = stringResource(R.string.sign_in_title)
 
-    var email by rememberSaveable { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    // Debug builds pointed at local fuchito start with its test user (see app/build.gradle.kts).
+    var email by rememberSaveable { mutableStateOf(BuildConfig.TEST_EMAIL) }
+    var password by remember { mutableStateOf(BuildConfig.TEST_PASSWORD) }
     var loading by remember { mutableStateOf(false) }
     val passwordFocus = remember { FocusRequester() }
 
