@@ -63,6 +63,23 @@
     <string name="show_password">Mostrar contraseña</string>
     <string name="hide_password">Ocultar contraseña</string>
     <string name="enter_email_password">Escribe tu email y contraseña.</string>
+    <!-- Sign up -->
+    <string name="create_account">Crear cuenta</string>
+    <string name="creating_account">Creando cuenta…</string>
+    <string name="register_lead">Crea tu cuenta para jugar quinielas con tus amigos. Te enviaremos un enlace para verificar tu email.</string>
+    <string name="first_name">Nombre</string>
+    <string name="last_name">Apellidos</string>
+    <string name="nickname">Apodo</string>
+    <string name="nickname_placeholder">Así te verán en las tablas</string>
+    <string name="password_placeholder">Mínimo 6 caracteres</string>
+    <string name="confirm_password">Confirma tu contraseña</string>
+    <string name="register_terms">Al crear tu cuenta aceptas los %1$s y el %2$s.</string>
+    <string name="fill_all_fields">Llena todos los campos.</string>
+    <string name="password_too_short">La contraseña debe tener al menos 6 caracteres.</string>
+    <string name="passwords_dont_match">Las contraseñas no coinciden.</string>
+    <string name="check_your_email">Revisa tu correo</string>
+    <string name="verify_your_email">Verifica tu email</string>
+    <string name="resend_email">Reenviar correo</string>
 
     <!-- Pools -->
     <string name="my_pools">Mis quinielas</string>

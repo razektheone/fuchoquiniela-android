@@ -51,6 +51,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -67,6 +68,7 @@ import razek.fuchoquiniela.R
 import razek.fuchoquiniela.data.ApiError
 import razek.fuchoquiniela.data.FuchoApi
 import razek.fuchoquiniela.data.Session
+import razek.fuchoquiniela.ui.components.AlertData
 import razek.fuchoquiniela.ui.components.AlertHost
 import razek.fuchoquiniela.ui.components.AlertState
 import razek.fuchoquiniela.ui.components.Badge
@@ -89,6 +91,7 @@ fun LoginScreen(message: String?, onMessageShown: () -> Unit) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val focus = LocalFocusManager.current
+    val keyboard = LocalSoftwareKeyboardController.current
     val haptics = LocalHapticFeedback.current
     val alerts = remember { AlertState() }
     val title = stringResource(R.string.sign_in_title)
@@ -97,6 +100,7 @@ fun LoginScreen(message: String?, onMessageShown: () -> Unit) {
     var email by rememberSaveable { mutableStateOf(BuildConfig.TEST_EMAIL) }
     var password by remember { mutableStateOf(BuildConfig.TEST_PASSWORD) }
     var loading by remember { mutableStateOf(false) }
+    var showRegister by rememberSaveable { mutableStateOf(false) }
     val passwordFocus = remember { FocusRequester() }
 
     LaunchedEffect(message) {
@@ -106,8 +110,22 @@ fun LoginScreen(message: String?, onMessageShown: () -> Unit) {
         }
     }
 
+    fun resendVerification(email: String, password: String) {
+        loading = true
+        scope.launch {
+            try {
+                val response = FuchoApi.resendVerification(email, password)
+                alerts.show(context.getString(R.string.verify_your_email), response.message)
+            } catch (e: ApiError) {
+                alerts.show(context, e, context.getString(R.string.verify_your_email))
+            } finally {
+                loading = false
+            }
+        }
+    }
+
     fun signIn() {
-        focus.clearFocus()
+        keyboard?.hide() // not clearFocus: see RegisterScreen.submit()
         val trimmed = email.trim()
         if (trimmed.isEmpty() || password.isEmpty()) {
             alerts.show(title, context.getString(R.string.enter_email_password))
@@ -121,11 +139,38 @@ fun LoginScreen(message: String?, onMessageShown: () -> Unit) {
                 haptics.performHapticFeedback(HapticFeedbackType.LongPress)
                 Session.signIn(response.token, response.user)
             } catch (e: ApiError) {
-                alerts.show(context, e, title)
+                if (e is ApiError.Server && e.unverified) {
+                    // 403 for an account that hasn't opened its verification link yet.
+                    alerts.show(
+                        AlertData(
+                            title = context.getString(R.string.verify_your_email),
+                            message = e.describe(context),
+                            confirmTitle = context.getString(R.string.resend_email),
+                            onConfirm = { resendVerification(trimmed, password) },
+                            dismissTitle = context.getString(R.string.ok),
+                        ),
+                    )
+                } else {
+                    alerts.show(context, e, title)
+                }
             } finally {
                 loading = false
             }
         }
+    }
+
+    if (showRegister) {
+        RegisterScreen(
+            onCancel = { showRegister = false },
+            onRegistered = { response ->
+                showRegister = false
+                email = response.email
+                password = ""
+                alerts.show(context.getString(R.string.check_your_email), response.message)
+            },
+        )
+        AlertHost(alerts)
+        return
     }
 
     Box(
@@ -223,7 +268,7 @@ fun LoginScreen(message: String?, onMessageShown: () -> Unit) {
                 }
 
                 Spacer(Modifier.height(Spacing.s))
-                TextButton(onClick = { openSite(context, "user/register") }) {
+                TextButton(onClick = { showRegister = true }) {
                     Row {
                         Text(stringResource(R.string.no_account) + " ", color = FuchoColors.textMuted, fontSize = 15.sp)
                         Text(stringResource(R.string.sign_up), color = FuchoColors.accent, fontSize = 15.sp, fontWeight = FontWeight.Bold)
