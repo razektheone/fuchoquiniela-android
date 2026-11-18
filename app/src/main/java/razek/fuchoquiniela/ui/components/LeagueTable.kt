@@ -27,7 +27,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.PlatformTextStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -197,6 +200,17 @@ fun FormBadge(result: String) {
         else -> stringResource(R.string.form_loss) to FuchoColors.live
     }
     Box(Modifier.size(16.dp).clip(RoundedCornerShape(4.dp)).background(color), contentAlignment = Alignment.Center) {
-        Text(text, color = Color.White, fontSize = 9.sp, fontWeight = FontWeight.Black)
+        // Without the font padding and with the line trimmed, the letter sits in the middle of the box.
+        Text(
+            text,
+            color = Color.White,
+            style = TextStyle(
+                fontSize = 9.sp,
+                lineHeight = 9.sp,
+                fontWeight = FontWeight.Black,
+                platformStyle = PlatformTextStyle(includeFontPadding = false),
+                lineHeightStyle = LineHeightStyle(LineHeightStyle.Alignment.Center, LineHeightStyle.Trim.Both),
+            ),
+        )
     }
 }
