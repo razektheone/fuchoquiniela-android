@@ -2,6 +2,7 @@ package razek.fuchoquiniela.ui
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.consumeWindowInsets
@@ -101,6 +102,9 @@ private fun MainNavigation(pendingJoin: String?, onJoinHandled: () -> Unit) {
 
     Scaffold(
         containerColor = FuchoColors.background,
+        // Only the tab bar's height: each screen's own Scaffold handles the status and
+        // navigation bars (the tab bar already covers the navigation bar when it's shown).
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
         bottomBar = {
             if (showTabs) {
                 NavigationBar(containerColor = FuchoColors.chrome) {

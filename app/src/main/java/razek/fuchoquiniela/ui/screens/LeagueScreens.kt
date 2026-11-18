@@ -154,9 +154,10 @@ fun LeagueMatchesScreen() {
     }
 
     LaunchedEffect(status) {
-        listState.scrollToItem(0)
         loadedOnce = false
         loadNextPage(replacing = true)
+        // Only when the list is on screen: scrolling waits for a layout, which the spinner has none of.
+        if (listState.layoutInfo.totalItemsCount > 0) listState.scrollToItem(0)
     }
     // Load the next page a few rows before the end.
     LaunchedEffect(listState) {
@@ -265,7 +266,7 @@ private fun LeagueMatchCard(match: LeagueMatch) {
                         },
                         fontWeight = FontWeight.Black,
                         fontSize = 15.sp,
-                        fontFamily = FontFamily.Monospace,
+                        fontFamily = if (match.hasResult) FontFamily.Monospace else FontFamily.Default,
                     )
                 }
                 Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.End) {
