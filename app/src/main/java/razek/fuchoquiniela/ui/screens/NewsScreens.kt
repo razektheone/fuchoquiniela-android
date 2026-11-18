@@ -37,6 +37,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
@@ -53,6 +54,7 @@ import coil.compose.AsyncImage
 import kotlinx.coroutines.launch
 import razek.fuchoquiniela.R
 import razek.fuchoquiniela.data.ApiError
+import razek.fuchoquiniela.data.AppLink
 import razek.fuchoquiniela.data.AppLocale
 import razek.fuchoquiniela.data.DateText
 import razek.fuchoquiniela.data.FuchoApi
@@ -177,7 +179,7 @@ private fun NewsCard(post: Post, onClick: () -> Unit) {
 /** A post rendered from its HTML body. Links open in a Custom Tab. */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewsDetailScreen(id: Int, onBack: () -> Unit) {
+fun NewsDetailScreen(id: Int, onBack: () -> Unit, onAppLink: (AppLink, String) -> Unit) {
     val context = LocalContext.current
     val alerts = remember { AlertState() }
     val title = stringResource(R.string.tab_news)
@@ -208,7 +210,7 @@ fun NewsDetailScreen(id: Int, onBack: () -> Unit) {
             if (loader.loading) LoadingBox(Modifier.padding(padding))
         } else {
             val html = remember(post) { render(context, post) }
-            PostWebView(html, Modifier.fillMaxSize().padding(padding))
+            PostWebView(html, Modifier.fillMaxSize().padding(padding), onAppLink)
         }
     }
     AlertHost(alerts)
@@ -216,7 +218,8 @@ fun NewsDetailScreen(id: Int, onBack: () -> Unit) {
 
 @SuppressLint("SetJavaScriptEnabled")
 @Composable
-private fun PostWebView(html: String, modifier: Modifier) {
+private fun PostWebView(html: String, modifier: Modifier, onAppLink: (AppLink, String) -> Unit) {
+    val currentOnAppLink by rememberUpdatedState(onAppLink)
     AndroidView(
         modifier = modifier,
         factory = { context ->
@@ -225,11 +228,16 @@ private fun PostWebView(html: String, modifier: Modifier) {
                 // Embedded videos and tweets in posts need scripts.
                 settings.javaScriptEnabled = true
                 webViewClient = object : WebViewClient() {
-                    // The page itself loads in place; tapped links open in a Custom Tab.
+                    // The page itself loads in place. Tapped links to pages the app has (the pool
+                    // list, a pool, Partidos, Tabla, another post…) open those screens; the rest
+                    // open in a Custom Tab.
                     override fun shouldOverrideUrlLoading(view: WebView, request: WebResourceRequest): Boolean {
                         if (!request.hasGesture()) return false
                         val url = request.url
-                        if (url.scheme == "http" || url.scheme == "https") {
+                        val appLink = AppLink.parse(url.toString())
+                        if (appLink != null) {
+                            currentOnAppLink(appLink, url.toString())
+                        } else if (url.scheme == "http" || url.scheme == "https") {
                             openWeb(view.context, url.toString())
                         } else {
                             runCatching { view.context.startActivity(Intent(Intent.ACTION_VIEW, url)) }

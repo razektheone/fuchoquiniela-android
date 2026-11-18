@@ -21,7 +21,13 @@ import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
+import razek.fuchoquiniela.data.AppLink
+import razek.fuchoquiniela.data.FuchoApi
+import razek.fuchoquiniela.data.SITE_URL
 import razek.fuchoquiniela.ui.components.LocalSideInset
+import razek.fuchoquiniela.ui.components.openWeb
 import razek.fuchoquiniela.ui.components.LogoMark
 import razek.fuchoquiniela.ui.components.sideInsetFor
 import androidx.compose.foundation.layout.fillMaxSize
@@ -122,6 +128,59 @@ private fun MainNavigation(pendingJoin: String?, onJoinHandled: () -> Unit) {
     val showTabs = Tab.entries.any { it.route == route }
     // Tablets and phones in landscape: tabs in a side rail instead of the bottom bar.
     val wide = LocalConfiguration.current.screenWidthDp >= 600
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+    // Requests from links inside the app (news posts) for the join dialog and the Partidos filter.
+    var linkJoin by remember { mutableStateOf<String?>(null) }
+    var matchesStatus by remember { mutableStateOf<Int?>(null) }
+
+    /**
+     * Opens a fuchoquiniela.com link on the app's own screen. A pool that isn't loaded yet is
+     * fetched first; if that fails (say, the user isn't in it), the page opens on the website.
+     */
+    fun openLink(link: AppLink, url: String) {
+        when (link) {
+            // "Entra a tu quiniela": with a single pool, go straight to filling it (the list stays
+            // underneath for Back); with several, show the list to pick one.
+            AppLink.Pools -> {
+                nav.selectTab(Tab.Pools.route)
+                scope.launch {
+                    val pools = runCatching { FuchoApi.pools().pools }.getOrNull() ?: return@launch
+                    PoolStore.put(pools)
+                    pools.singleOrNull()?.let { nav.navigate("pool/${it.uuid}") }
+                }
+            }
+            is AppLink.JoinPool -> {
+                linkJoin = link.uuid?.let { "$SITE_URL/pool/$it/join" } ?: ""
+                nav.selectTab(Tab.Pools.route)
+            }
+            is AppLink.Matches -> {
+                matchesStatus = if (link.results) 1 else 0
+                nav.selectTab(Tab.Matches.route)
+            }
+            AppLink.Table -> nav.selectTab(Tab.Table.route)
+            AppLink.News -> nav.selectTab(Tab.News.route)
+            AppLink.Simulator -> nav.navigate("simulator")
+            AppLink.Help -> nav.navigate("help")
+            is AppLink.Post -> nav.navigate("news/${link.id}")
+            is AppLink.PoolPage -> scope.launch {
+                val pool = PoolStore[link.uuid]
+                    ?: runCatching { FuchoApi.pool(link.uuid).pool.also(PoolStore::put) }.getOrNull()
+                if (pool == null) {
+                    openWeb(context, url)
+                    return@launch
+                }
+                nav.navigate(
+                    when (link.page) {
+                        AppLink.PoolPage.Page.Matches -> "pool/${pool.uuid}"
+                        AppLink.PoolPage.Page.Standings -> "pool/${pool.uuid}/standings"
+                        AppLink.PoolPage.Page.Rounds -> "pool/${pool.uuid}/rounds"
+                        AppLink.PoolPage.Page.Info -> "pool/${pool.uuid}/info"
+                    },
+                )
+            }
+        }
+    }
 
     Scaffold(
         containerColor = FuchoColors.background,
@@ -165,12 +224,17 @@ private fun MainNavigation(pendingJoin: String?, onJoinHandled: () -> Unit) {
             NavHost(nav, startDestination = Tab.Pools.route) {
                 composable(Tab.Pools.route) {
                     PoolsScreen(
-                        pendingJoin = pendingJoin,
-                        onJoinHandled = onJoinHandled,
+                        pendingJoin = pendingJoin ?: linkJoin,
+                        onJoinHandled = {
+                            onJoinHandled()
+                            linkJoin = null
+                        },
                         onOpenPool = { nav.navigate("pool/${it.uuid}") },
                     )
                 }
-                composable(Tab.Matches.route) { LeagueMatchesScreen() }
+                composable(Tab.Matches.route) {
+                    LeagueMatchesScreen(requestedStatus = matchesStatus, onRequestHandled = { matchesStatus = null })
+                }
                 composable(Tab.Table.route) { LeagueTableScreen(onSimulator = { nav.navigate("simulator") }) }
                 composable(Tab.News.route) { NewsScreen(onOpenPost = { nav.navigate("news/$it") }) }
                 composable(Tab.More.route) {
@@ -210,7 +274,11 @@ private fun MainNavigation(pendingJoin: String?, onJoinHandled: () -> Unit) {
                     }
                 }
                 composable("news/{id}", listOf(navArgument("id") { type = NavType.IntType })) { backStack ->
-                    NewsDetailScreen(backStack.arguments?.getInt("id") ?: 0, onBack = { nav.popBackStack() })
+                    NewsDetailScreen(
+                        backStack.arguments?.getInt("id") ?: 0,
+                        onBack = { nav.popBackStack() },
+                        onAppLink = { link, url -> openLink(link, url) },
+                    )
                 }
                 composable("simulator") { SimulatorScreen(onBack = { nav.popBackStack() }) }
                 composable("help") { HelpScreen(onBack = { nav.popBackStack() }) }

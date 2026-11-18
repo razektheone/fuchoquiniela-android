@@ -118,11 +118,18 @@ private const val WIDE_TABLE_DP = 520
  */
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
-fun LeagueMatchesScreen() {
+fun LeagueMatchesScreen(requestedStatus: Int? = null, onRequestHandled: () -> Unit = {}) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val alerts = remember { AlertState() }
-    var status by remember { mutableIntStateOf(0) } // 0 upcoming, 1 results
+    var status by remember { mutableIntStateOf(requestedStatus ?: 0) } // 0 upcoming, 1 results
+    // A link like /partidos?estado=resultados picks the filter.
+    LaunchedEffect(requestedStatus) {
+        if (requestedStatus != null) {
+            status = requestedStatus
+            onRequestHandled()
+        }
+    }
     val matches = remember { mutableStateListOf<LeagueMatch>() }
     var page by remember { mutableIntStateOf(0) }
     var hasMore by remember { mutableStateOf(true) }
