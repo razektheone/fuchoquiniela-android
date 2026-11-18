@@ -22,7 +22,9 @@ export JAVA_HOME=/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home
 
 The app uses the same JSON API as iOS, `/api/v1` (fuchito `routes/api.php`, `app/Http/Controllers/Api/V1`), with Sanctum bearer tokens that carry the `mobile` ability. Every endpoint except `auth/login` needs a token. See the iOS CLAUDE.md for the endpoint table; change the contract on all sides together.
 
-- The base URL is `BuildConfig.API_BASE_URL` (`app/build.gradle.kts`), production by default. For the local fuchito Docker setup on the emulator use `http://10.0.2.2:50800/api/v1`; `res/xml/network_security_config.xml` allows cleartext only for `10.0.2.2` and `localhost`.
+- The base URL is `BuildConfig.API_BASE_URL` (`app/build.gradle.kts`), production by default. Debug builds use `fucho.apiBaseUrl` from the git-ignored `local.properties` when it's set; for the local fuchito Docker setup on the emulator that's `http://10.0.2.2:50800/api/v1`. `res/xml/network_security_config.xml` allows cleartext only for `10.0.2.2` and `localhost`.
+- Testing against local fuchito: `local.properties` can also hold `fucho.testEmail`/`fucho.testPassword` for a verified test user created in the local database (never a real account).
+- Emulator: the AVD `fucho35` (Android 15, arm64) lives in `~/.android/avd`. The disk is tight, so boot it with `$ANDROID_SDK_ROOT/emulator/emulator -avd fucho35 -no-snapshot -partition-size 2048`; it still refuses to start with less than ~7.3 GB free.
 - The server owns the rules: whether a match is locked (kickoff in UTC) and scoring (3 points for an exact score, 1 for the right result). The app only reflects them.
 
 ## Localization
