@@ -22,13 +22,16 @@ sealed class AppLink {
     data class Post(val id: Int) : AppLink()
     data object Help : AppLink()
 
+    /** /pool on its own: the website's "Crear quiniela" form. */
+    data object CreatePool : AppLink()
+
     companion object {
         private val hosts = setOf("fuchoquiniela.com", "www.fuchoquiniela.com")
         private val uuidPattern = Regex("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}")
 
         /**
          * The app screen for a link, or null when it should open in the browser: other sites,
-         * pages the app doesn't have (creating a pool, legal pages, teams…) and /blog/link/{id},
+         * pages the app doesn't have (legal pages, teams…) and /blog/link/{id},
          * which redirects to the post's outside source.
          */
         fun parse(url: String): AppLink? {
@@ -55,7 +58,7 @@ sealed class AppLink {
         }
 
         private fun pool(parts: List<String>): AppLink? {
-            val first = parts.firstOrNull() ?: return null // /pool alone creates a pool: web only
+            val first = parts.firstOrNull() ?: return CreatePool
             if (first == "join") return JoinPool(null)
             val uuid = uuidPattern.matchEntire(first)?.value ?: return null
             val page = when (parts.getOrNull(1)) {

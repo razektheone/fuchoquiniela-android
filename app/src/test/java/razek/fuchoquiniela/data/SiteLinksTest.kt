@@ -25,6 +25,7 @@ class SiteLinksTest {
         assertEquals(AppLink.PoolPage(uuid, AppLink.PoolPage.Page.Info), AppLink.parse("https://www.fuchoquiniela.com/pool/$uuid/participants"))
         assertEquals(AppLink.JoinPool(uuid), AppLink.parse("https://www.fuchoquiniela.com/pool/$uuid/join"))
         assertEquals(AppLink.JoinPool(null), AppLink.parse("https://www.fuchoquiniela.com/pool/join"))
+        assertEquals(AppLink.CreatePool, AppLink.parse("https://www.fuchoquiniela.com/pool"))
         assertEquals(4, page.enumConstants!!.size)
     }
 
@@ -41,7 +42,6 @@ class SiteLinksTest {
 
     @Test
     fun leavesEverythingElseToTheBrowser() {
-        assertNull(AppLink.parse("https://www.fuchoquiniela.com/pool")) // creating a pool is web only
         assertNull(AppLink.parse("https://www.fuchoquiniela.com/blog/link/7")) // redirects to the source
         assertNull(AppLink.parse("https://www.fuchoquiniela.com/home/terms"))
         assertNull(AppLink.parse("https://www.fuchoquiniela.com/tabla/3/apertura-2025"))

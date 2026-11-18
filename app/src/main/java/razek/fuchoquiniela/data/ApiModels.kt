@@ -58,6 +58,18 @@ data class PoolsResponse(val pools: List<Pool>)
 data class PoolResponse(val pool: Pool)
 
 @Serializable
+data class SeasonsResponse(val seasons: List<Season>)
+
+/** POST /pools. Null price and description are left out of the JSON. */
+@Serializable
+data class CreatePoolRequest(
+    val name: String,
+    val seasonId: Int,
+    val price: Double? = null,
+    val description: String? = null,
+)
+
+@Serializable
 data class PickScore(val scoreLocal: Int, val scoreVisit: Int)
 
 @Serializable

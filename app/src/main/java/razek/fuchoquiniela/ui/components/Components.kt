@@ -223,6 +223,8 @@ fun EmptyState(
     modifier: Modifier = Modifier,
     actionTitle: String? = null,
     onAction: (() -> Unit)? = null,
+    secondaryTitle: String? = null,
+    onSecondary: (() -> Unit)? = null,
 ) {
     Box(modifier.fillMaxSize().padding(Spacing.xl), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.widthIn(max = 420.dp)) {
@@ -239,6 +241,10 @@ fun EmptyState(
             if (actionTitle != null && onAction != null) {
                 Spacer(Modifier.height(Spacing.xl))
                 PrimaryButton(actionTitle, onAction)
+            }
+            if (secondaryTitle != null && onSecondary != null) {
+                Spacer(Modifier.height(Spacing.m))
+                SecondaryButton(secondaryTitle, onSecondary)
             }
         }
     }

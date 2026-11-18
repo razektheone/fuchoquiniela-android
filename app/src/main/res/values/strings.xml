@@ -68,6 +68,17 @@
     <string name="my_pools">Mis quinielas</string>
     <string name="account">Cuenta</string>
     <string name="join_pool">Unirme a una quiniela</string>
+    <string name="create_pool">Crear quiniela</string>
+    <string name="create_pool_lead">Elige la temporada, ponle nombre y luego invita a tus amigos.</string>
+    <string name="pool_name">Nombre</string>
+    <string name="pool_name_placeholder">La quiniela de la oficina</string>
+    <string name="season">Temporada</string>
+    <string name="entry_fee_hint">Opcional. En pesos, hasta $999.99.</string>
+    <string name="description_hint">Opcional: reglas, premios, fechas de pago…</string>
+    <string name="creating">Creando…</string>
+    <string name="pool_name_required">Ponle un nombre a tu quiniela.</string>
+    <string name="entry_fee_invalid">La cooperación debe ser una cantidad entre 0 y 999.99.</string>
+    <string name="no_seasons">No hay temporadas activas para crear una quiniela.</string>
     <string name="join">Unirme</string>
     <string name="join_prompt">Pega el enlace de invitación o el código de la quiniela.</string>
     <string name="join_unrecognized">No reconocimos ese enlace o código.</string>
@@ -77,7 +88,7 @@
     <string name="sign_out">Cerrar sesión</string>
     <string name="sign_out_confirm">¿Cerrar sesión en este dispositivo?</string>
     <string name="no_pools_title">Aún no tienes quinielas</string>
-    <string name="no_pools_message">Crea una en fuchoquiniela.com o únete con el enlace de invitación que te compartieron.</string>
+    <string name="no_pools_message">Crea una e invita a tus amigos, o únete con el enlace de invitación que te compartieron.</string>
     <string name="participants_one">1 participante</string>
     <string name="participants_n">%1$d participantes</string>
     <string name="invite_friends">Invitar amigos</string>
@@ -205,8 +216,8 @@
     <string name="faq">Preguntas frecuentes</string>
     <string name="need_help">¿Necesitas ayuda?</string>
     <string name="email_us">Escríbenos</string>
-    <string name="step1_title">Únete a una quiniela</string>
-    <string name="step1_text">Toca el botón para unirte en Quinielas y pega el enlace de invitación o el código que te compartieron. Las quinielas se crean en fuchoquiniela.com.</string>
+    <string name="step1_title">Crea o únete a una quiniela</string>
+    <string name="step1_text">En Quinielas toca + para crear una, o el botón para unirte y pega el enlace de invitación o el código que te compartieron.</string>
     <string name="step2_title">Haz tus pronósticos</string>
     <string name="step2_text">Abre la quiniela y usa − y + para el marcador de cada partido. Se guardan solos: verás «Pronósticos guardados» abajo.</string>
     <string name="step3_title">Antes de que empiece el partido</string>
@@ -218,7 +229,7 @@
     <string name="rule_result_example">Pronosticaste 1-0 y quedó 3-1</string>
     <string name="rule_miss_example">Pronosticaste 1-1 y quedó 0-2</string>
     <string name="faq1_q">¿Cómo creo una quiniela?</string>
-    <string name="faq1_a">Por ahora se crean en fuchoquiniela.com: elige un nombre y una temporada. Después aparece aquí, en Quinielas, y la puedes compartir con tus amigos.</string>
+    <string name="faq1_a">En Quinielas toca +, ponle nombre y elige la temporada. Si quieres, agrega una cooperación y una descripción. Después invita a tus amigos desde ⋮ › Invitar amigos.</string>
     <string name="faq2_q">¿Cómo invito a mis amigos?</string>
     <string name="faq2_a">Abre tu quiniela, toca ⋮ › Invitar amigos (o mantén presionada la quiniela en la lista) y comparte el enlace por WhatsApp, mensaje o correo. Tus amigos lo abren o lo pegan en la app con el botón para unirse.</string>
     <string name="faq3_q">¿Por qué no puedo cambiar un partido?</string>

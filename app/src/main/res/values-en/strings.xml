@@ -63,6 +63,17 @@
     <string name="my_pools">My pools</string>
     <string name="account">Account</string>
     <string name="join_pool">Join a pool</string>
+    <string name="create_pool">Create pool</string>
+    <string name="create_pool_lead">Pick the season, give it a name, then invite your friends.</string>
+    <string name="pool_name">Name</string>
+    <string name="pool_name_placeholder">The office pool</string>
+    <string name="season">Season</string>
+    <string name="entry_fee_hint">Optional. In pesos, up to $999.99.</string>
+    <string name="description_hint">Optional: rules, prizes, payment dates…</string>
+    <string name="creating">Creating…</string>
+    <string name="pool_name_required">Give your pool a name.</string>
+    <string name="entry_fee_invalid">The entry fee must be an amount between 0 and 999.99.</string>
+    <string name="no_seasons">There are no active seasons to create a pool in.</string>
     <string name="join">Join</string>
     <string name="join_prompt">Paste the invite link or the pool\'s code.</string>
     <string name="join_unrecognized">We didn\'t recognize that link or code.</string>
@@ -72,7 +83,7 @@
     <string name="sign_out">Sign out</string>
     <string name="sign_out_confirm">Sign out on this device?</string>
     <string name="no_pools_title">You\'re not in any pools yet</string>
-    <string name="no_pools_message">Create one on fuchoquiniela.com or join with the invite link someone shared with you.</string>
+    <string name="no_pools_message">Create one and invite your friends, or join with the invite link someone shared with you.</string>
     <string name="participants_one">1 participant</string>
     <string name="participants_n">%1$d participants</string>
     <string name="invite_friends">Invite friends</string>
@@ -200,8 +211,8 @@
     <string name="faq">FAQ</string>
     <string name="need_help">Need help?</string>
     <string name="email_us">Email us</string>
-    <string name="step1_title">Join a pool</string>
-    <string name="step1_text">Tap the join button in Pools and paste the invite link or code you were sent. Pools are created on fuchoquiniela.com.</string>
+    <string name="step1_title">Create or join a pool</string>
+    <string name="step1_text">In Pools, tap + to create one, or the join button to paste the invite link or code you were sent.</string>
     <string name="step2_title">Make your picks</string>
     <string name="step2_text">Open the pool and use − and + to set each match\'s score. Picks save automatically: you\'ll see “Picks saved” at the bottom.</string>
     <string name="step3_title">Before kickoff</string>
@@ -213,7 +224,7 @@
     <string name="rule_result_example">You picked 1-0 and it ended 3-1</string>
     <string name="rule_miss_example">You picked 1-1 and it ended 0-2</string>
     <string name="faq1_q">How do I create a pool?</string>
-    <string name="faq1_a">For now, pools are created on fuchoquiniela.com: pick a name and a season. It then shows up here under Pools, and you can share it with your friends.</string>
+    <string name="faq1_a">In Pools, tap +, give it a name and pick the season. Add an entry fee and a description if you like. Then invite your friends from ⋮ › Invite friends.</string>
     <string name="faq2_q">How do I invite my friends?</string>
     <string name="faq2_a">Open your pool, tap ⋮ › Invite friends (or touch and hold the pool in the list), then share the link by WhatsApp, message or email. Your friends open it, or paste it in the app with the join button.</string>
     <string name="faq3_q">Why can\'t I change a match?</string>

@@ -105,6 +105,13 @@ object FuchoApi {
     suspend fun pool(uuid: String): PoolResponse = send("GET", "pools/$uuid")
     suspend fun joinPool(uuid: String): PoolResponse = send("POST", "pools/$uuid/join")
 
+    /** Seasons a new pool can use (the active ones, like the web form). */
+    suspend fun seasons(): SeasonsResponse = send("GET", "seasons")
+
+    /** Creates a pool with the user as admin and first participant; repeating it returns the same pool. */
+    suspend fun createPool(request: CreatePoolRequest): PoolResponse =
+        send("POST", "pools", body = json.encodeToString(request))
+
     /** `filter`: "all" (whole season) or "open" (only matches that can still be picked). */
     suspend fun matches(poolUuid: String, filter: String = "all"): MatchesResponse =
         send("GET", "pools/$poolUuid/matches", query = mapOf("filter" to filter))

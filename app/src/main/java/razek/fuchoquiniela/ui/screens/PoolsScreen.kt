@@ -19,6 +19,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.Language
 import androidx.compose.material.icons.filled.PersonAdd
@@ -87,7 +88,12 @@ import razek.fuchoquiniela.ui.theme.Spacing
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PoolsScreen(pendingJoin: String?, onJoinHandled: () -> Unit, onOpenPool: (Pool) -> Unit) {
+fun PoolsScreen(
+    pendingJoin: String?,
+    onJoinHandled: () -> Unit,
+    onOpenPool: (Pool) -> Unit,
+    onCreatePool: () -> Unit,
+) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val alerts = remember { AlertState() }
@@ -140,6 +146,9 @@ fun PoolsScreen(pendingJoin: String?, onJoinHandled: () -> Unit, onOpenPool: (Po
         containerColor = FuchoColors.background,
         topBar = {
             FuchoTopBar(stringResource(R.string.my_pools)) {
+                IconButton(onClick = onCreatePool) {
+                    Icon(Icons.Filled.Add, stringResource(R.string.create_pool))
+                }
                 IconButton(onClick = { joinText = "" }) {
                     Icon(Icons.Filled.PersonAdd, stringResource(R.string.join_pool))
                 }
@@ -155,6 +164,11 @@ fun PoolsScreen(pendingJoin: String?, onJoinHandled: () -> Unit, onOpenPool: (Po
                             }
                             HorizontalDivider(color = FuchoColors.separator)
                         }
+                        DropdownMenuItem(
+                            text = { Text(stringResource(R.string.create_pool)) },
+                            leadingIcon = { Icon(Icons.Filled.Add, null) },
+                            onClick = { menuOpen = false; onCreatePool() },
+                        )
                         DropdownMenuItem(
                             text = { Text(stringResource(R.string.join_pool)) },
                             leadingIcon = { Icon(Icons.Filled.PersonAdd, null) },
@@ -187,8 +201,10 @@ fun PoolsScreen(pendingJoin: String?, onJoinHandled: () -> Unit, onOpenPool: (Po
                     icon = Icons.Outlined.EmojiEvents,
                     title = stringResource(R.string.no_pools_title),
                     message = stringResource(R.string.no_pools_message),
-                    actionTitle = stringResource(R.string.join_pool),
-                    onAction = { joinText = "" },
+                    actionTitle = stringResource(R.string.create_pool),
+                    onAction = onCreatePool,
+                    secondaryTitle = stringResource(R.string.join_pool),
+                    onSecondary = { joinText = "" },
                 )
                 else -> LazyColumn(
                     contentPadding = PaddingValues(start = gutter, end = gutter, top = Spacing.s, bottom = Spacing.xl),

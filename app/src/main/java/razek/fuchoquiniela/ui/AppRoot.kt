@@ -70,6 +70,7 @@ import androidx.navigation.navArgument
 import razek.fuchoquiniela.R
 import razek.fuchoquiniela.data.PoolStore
 import razek.fuchoquiniela.data.Session
+import razek.fuchoquiniela.ui.screens.CreatePoolScreen
 import razek.fuchoquiniela.ui.screens.HelpScreen
 import razek.fuchoquiniela.ui.screens.LeagueMatchesScreen
 import razek.fuchoquiniela.ui.screens.LeagueTableScreen
@@ -162,6 +163,7 @@ private fun MainNavigation(pendingJoin: String?, onJoinHandled: () -> Unit) {
             AppLink.News -> nav.selectTab(Tab.News.route)
             AppLink.Simulator -> nav.navigate("simulator")
             AppLink.Help -> nav.navigate("help")
+            AppLink.CreatePool -> nav.navigate("pool/new")
             is AppLink.Post -> nav.navigate("news/${link.id}")
             is AppLink.PoolPage -> scope.launch {
                 val pool = PoolStore[link.uuid]
@@ -230,6 +232,19 @@ private fun MainNavigation(pendingJoin: String?, onJoinHandled: () -> Unit) {
                             linkJoin = null
                         },
                         onOpenPool = { nav.navigate("pool/${it.uuid}") },
+                        onCreatePool = { nav.navigate("pool/new") },
+                    )
+                }
+                // Declared before "pool/{uuid}" so "new" isn't read as a pool code.
+                composable("pool/new") {
+                    CreatePoolScreen(
+                        onBack = { nav.popBackStack() },
+                        // The new pool replaces the form: Back from it returns to the list.
+                        onCreated = { pool ->
+                            nav.navigate("pool/${pool.uuid}") {
+                                popUpTo("pool/new") { inclusive = true }
+                            }
+                        },
                     )
                 }
                 composable(Tab.Matches.route) {
