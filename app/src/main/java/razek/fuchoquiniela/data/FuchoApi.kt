@@ -38,7 +38,11 @@ sealed class ApiError : Exception() {
 
     /** 401: bad credentials on login, or an expired/revoked token elsewhere. */
     class Unauthorized(val serverMessage: String?, val duringLogin: Boolean) : ApiError()
-    class Server(val status: Int, val serverMessage: String?) : ApiError()
+    /**
+     * Any other failure status. `serverMessage` holds every validation message for a 422.
+     * `unverified` marks the login 403 for an email that hasn't been verified yet.
+     */
+    class Server(val status: Int, val serverMessage: String?, val unverified: Boolean = false) : ApiError()
     class Decoding(override val cause: Throwable) : ApiError()
 
     fun describe(context: Context): String = when (this) {
@@ -95,6 +99,14 @@ object FuchoApi {
         val body = mapOf("email" to email, "password" to password, "device_name" to deviceName)
         return send("POST", "auth/login", body = json.encodeToString(body), authenticated = false)
     }
+
+    /** Creates an account; the server emails a verification link and returns no token. */
+    suspend fun register(request: RegisterRequest): RegisterResponse =
+        send("POST", "auth/register", body = json.encodeToString(request), authenticated = false)
+
+    /** Sends the verification email again; needs the account's password, like login. */
+    suspend fun resendVerification(email: String, password: String): MessageResponse =
+        send("POST", "auth/verification", body = json.encodeToString(mapOf("email" to email, "password" to password)), authenticated = false)
 
     suspend fun logout() {
         sendRaw("POST", "auth/logout")
@@ -194,14 +206,15 @@ object FuchoApi {
             }
         }
 
-        val message = runCatching { json.decodeFromString<ApiErrorBody>(text).message }.getOrNull()
-        return when (status) {
-            in 200..299 -> text
+        if (status in 200..299) return text
+        val error = runCatching { json.decodeFromString<ApiErrorBody>(text) }.getOrNull()
+        val message = error?.text
+        throw when (status) {
             401 -> {
                 if (authenticated) Session.expire()
-                throw ApiError.Unauthorized(message, duringLogin = !authenticated)
+                ApiError.Unauthorized(message, duringLogin = !authenticated)
             }
-            else -> throw ApiError.Server(status, message)
+            else -> ApiError.Server(status, message, unverified = error?.unverified == true)
         }
     }
 

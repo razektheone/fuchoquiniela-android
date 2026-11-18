@@ -344,7 +344,34 @@ data class PostsResponse(val posts: List<Post>, val page: Int, val hasMore: Bool
 data class PostResponse(val post: Post)
 
 @Serializable
-data class ApiErrorBody(val message: String? = null)
+data class ApiErrorBody(
+    val message: String? = null,
+    /** 422s: Laravel's messages per field; `message` only names the first one. */
+    val errors: Map<String, List<String>>? = null,
+    /** Login 403 for an account whose email isn't verified yet. */
+    val unverified: Boolean = false,
+) {
+    /** Every validation message, one per line, or `message` when there are none. */
+    val text: String?
+        get() = errors?.values?.flatten()?.filter { it.isNotBlank() }?.takeIf { it.isNotEmpty() }?.joinToString("\n") ?: message
+}
+
+/** POST auth/register. The server answers with a message and no token: the email must be verified first. */
+@Serializable
+data class RegisterRequest(
+    val firstName: String,
+    val lastName: String,
+    val nickname: String,
+    val email: String,
+    val password: String,
+    val passwordConfirmation: String,
+)
+
+@Serializable
+data class RegisterResponse(val message: String, val email: String)
+
+@Serializable
+data class MessageResponse(val message: String)
 
 private fun displayName(name: String?, nickname: String?): String =
     nickname?.takeIf { it.isNotEmpty() } ?: name ?: "—"

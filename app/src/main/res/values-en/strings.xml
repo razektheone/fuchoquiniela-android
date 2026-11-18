@@ -58,6 +58,23 @@
     <string name="show_password">Show password</string>
     <string name="hide_password">Hide password</string>
     <string name="enter_email_password">Enter your email and password.</string>
+    <!-- Sign up -->
+    <string name="create_account">Create account</string>
+    <string name="creating_account">Creating account…</string>
+    <string name="register_lead">Create your account to play pools with your friends. We\'ll email you a link to verify your address.</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="nickname">Nickname</string>
+    <string name="nickname_placeholder">How others see you in the standings</string>
+    <string name="password_placeholder">At least 6 characters</string>
+    <string name="confirm_password">Confirm your password</string>
+    <string name="register_terms">By creating your account you accept the %1$s and the %2$s.</string>
+    <string name="fill_all_fields">Fill in every field.</string>
+    <string name="password_too_short">Your password must have at least 6 characters.</string>
+    <string name="passwords_dont_match">The passwords don\'t match.</string>
+    <string name="check_your_email">Check your email</string>
+    <string name="verify_your_email">Verify your email</string>
+    <string name="resend_email">Resend email</string>
 
     <!-- Pools -->
     <string name="my_pools">My pools</string>
