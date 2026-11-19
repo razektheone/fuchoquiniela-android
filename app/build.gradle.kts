@@ -24,6 +24,22 @@ android {
         buildConfigField("String", "TEST_PASSWORD", "\"\"")
     }
 
+    // Release signing comes from the git-ignored keystore.properties (storeFile, storePassword,
+    // keyAlias, keyPassword). Without it, release builds come out unsigned. Every update has to
+    // use the same key, or installed copies can't upgrade: back up the .jks and its passwords.
+    val keystore = rootProject.file("keystore.properties").takeIf { it.exists() }
+        ?.let { file -> Properties().apply { file.inputStream().use { load(it) } } }
+    signingConfigs {
+        if (keystore != null) {
+            create("release") {
+                storeFile = file(keystore.getProperty("storeFile"))
+                storePassword = keystore.getProperty("storePassword")
+                keyAlias = keystore.getProperty("keyAlias")
+                keyPassword = keystore.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         debug {
             val local = rootProject.file("local.properties").takeIf { it.exists() }
@@ -41,8 +57,9 @@ android {
         }
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-        }
+            if (keystore != null) signingConfig = signingConfigs.getByName("release")        }
     }
 
     compileOptions {

@@ -16,7 +16,14 @@ The machine's toolchain was installed with Homebrew (`openjdk@17`, `android-comm
 export JAVA_HOME=/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home
 ./gradlew assembleDebug          # app/build/outputs/apk/debug/app-debug.apk
 ./gradlew testDebugUnitTest      # JVM tests in app/src/test (models, dates, simulator)
+./gradlew assembleRelease        # app/build/outputs/apk/release/app-release.apk (signed, minified)
 ```
+
+### Release APK (shared directly, not through Play)
+
+- Release builds always use production and have empty test credentials. They are minified with R8 and resource shrinking, so check a release build on a device before sharing it: a minification problem only shows up at runtime.
+- Signing reads the git-ignored `keystore.properties` (`storeFile`, `storePassword`, `keyAlias`, `keyPassword`). The key is `~/.android/fuchoquiniela-release.jks`, alias `fuchoquiniela`. Every update must be signed with this same key and have a higher `versionCode`, or phones that installed the app can't update it. Never regenerate it; keep a backup of the .jks and its passwords.
+- Shared APKs go in the git-ignored `dist/` (e.g. `dist/fuchoquiniela-1.0.apk`). A phone with a debug build (signed with the debug key) has to uninstall it before installing the release APK.
 
 ## Backend API
 
