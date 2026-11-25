@@ -94,6 +94,7 @@ import razek.fuchoquiniela.ui.components.gutter
 import razek.fuchoquiniela.ui.components.GroupedSection
 import razek.fuchoquiniela.ui.components.LeagueTableHeader
 import razek.fuchoquiniela.ui.components.LeagueTableRow
+import razek.fuchoquiniela.ui.components.LiguillaBracket
 import razek.fuchoquiniela.ui.components.ListRow
 import razek.fuchoquiniela.ui.components.LoadingBox
 import razek.fuchoquiniela.ui.components.MAX_GOALS
@@ -312,9 +313,15 @@ fun LeagueTableScreen(onSimulator: () -> Unit) {
         // A 404 means there's no active tournament; the screen says so instead of an alert.
         if (!(error is ApiError.Server && error.status == 404)) alerts.show(context, error, title)
     }) { FuchoApi.standings() }
+    // The Liguilla bracket goes above the table while the server says it's visible (the website's
+    // home page rule). It's extra, so a 404 or any failure just leaves it out.
+    val liguillaLoader = rememberLoader(onError = {}) { FuchoApi.liguilla() }
     var detail by remember { mutableStateOf<TableRow?>(null) }
 
-    LaunchedEffect(Unit) { loader.load() }
+    LaunchedEffect(Unit) {
+        loader.load()
+        liguillaLoader.load()
+    }
 
     Scaffold(
         containerColor = FuchoColors.background,
@@ -326,12 +333,17 @@ fun LeagueTableScreen(onSimulator: () -> Unit) {
     ) { padding ->
         PullToRefreshBox(
             isRefreshing = loader.loading && loader.loaded,
-            onRefresh = { loader.load() },
+            onRefresh = { loader.load(); liguillaLoader.load() },
             modifier = Modifier.fillMaxSize().padding(padding),
         ) {
             val response = loader.value
             val error = loader.error
+            val liguilla = liguillaLoader.value?.takeIf { it.visible && liguillaLoader.error == null }
             when {
+                response == null && liguilla != null && error is ApiError.Server && error.status == 404 ->
+                    LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(bottom = Spacing.xl)) {
+                        item { LiguillaBracket(liguilla) }
+                    }
                 response == null && error is ApiError.Server && error.status == 404 -> EmptyState(
                     Icons.Outlined.FormatListNumbered,
                     stringResource(R.string.no_tournament),
@@ -341,6 +353,7 @@ fun LeagueTableScreen(onSimulator: () -> Unit) {
                 else -> BoxWithConstraints(Modifier.fillMaxSize()) {
                     val wide = maxWidth.value >= WIDE_TABLE_DP
                     LazyColumn(Modifier.fillMaxSize(), contentPadding = PaddingValues(bottom = Spacing.xl)) {
+                        if (liguilla != null) item(key = "liguilla") { LiguillaBracket(liguilla) }
                         item {
                             GroupedSection(stringResource(R.string.liga_mx)) {
                                 ListRow(

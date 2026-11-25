@@ -283,6 +283,70 @@ data class StandingsResponse(
     val rows: List<TableRow>,
 )
 
+/**
+ * GET /liguilla: the Liga MX knockout bracket of the home page, computed by the server (seeding,
+ * reseeded semifinals, two legs, the better-placed team advancing on a level aggregate).
+ * Shown only when [visible], the same rule as the website.
+ */
+@Serializable
+data class LiguillaResponse(
+    val season: Season,
+    val visible: Boolean = false,
+    /** The regular season isn't over: the ties are how the table stands today. */
+    val projected: Boolean = false,
+    val regularRemaining: Int = 0,
+    val champion: BracketTeam? = null,
+    val stages: List<BracketStage> = emptyList(),
+)
+
+/** A bracket team; `seed` is its regular-season table position. */
+@Serializable
+data class BracketTeam(
+    val id: Int,
+    val name: String,
+    val shortname: String? = null,
+    val imageUrl: String? = null,
+    val seed: Int? = null,
+)
+
+@Serializable
+data class BracketStage(val round: String, val name: String, val ties: List<BracketTie> = emptyList())
+
+/** A two-legged tie. `high` is the better-placed team (it hosts the second leg); null teams are undecided. */
+@Serializable
+data class BracketTie(
+    val high: BracketTeam? = null,
+    val low: BracketTeam? = null,
+    /** pending, in_progress or finished. */
+    val status: String = "pending",
+    val projected: Boolean = false,
+    val aggregate: BracketAggregate? = null,
+    val winnerId: Int? = null,
+    /** aggregate, position or penalties. */
+    val decidedBy: String? = null,
+    /** In date order. */
+    val legs: List<BracketLeg> = emptyList(),
+) {
+    val isLive: Boolean get() = legs.any { it.isLive }
+}
+
+@Serializable
+data class BracketAggregate(val high: Int, val low: Int)
+
+/** One leg; `high`/`low` are each team's goals in it. */
+@Serializable
+data class BracketLeg(
+    val matchId: Int,
+    val date: String,
+    val hostTeamId: Int? = null,
+    val played: Boolean = false,
+    val isLive: Boolean = false,
+    val high: Int? = null,
+    val low: Int? = null,
+) {
+    val kickoff: java.time.Instant? get() = parseDate(date)
+}
+
 /** A match outside any pool (match list and simulator). */
 @Serializable
 data class LeagueMatch(

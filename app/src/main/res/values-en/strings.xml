@@ -270,4 +270,20 @@
     <string name="simulator_soon">The simulator will be available when the next Liga MX tournament starts.</string>
     <string name="season_finished">Regular season finished</string>
     <string name="season_finished_message">All matches have been played. Check the final table.</string>
+
+    <!-- Liguilla bracket (Tabla) -->
+    <string name="liguilla">Liguilla</string>
+    <string name="liguilla_projection">Projection: these would be the matchups if the tournament ended today.</string>
+    <string name="champion">Champion</string>
+    <string name="to_be_decided">To be decided</string>
+    <string name="tie_aggregate">Aggregate %1$d-%2$d</string>
+    <string name="tie_by_position">Aggregate %1$d-%2$d · advances on table position</string>
+    <string name="tie_won_on_penalties">Aggregate %1$d-%2$d, won on penalties</string>
+    <string name="tie_to_penalties">Goes to extra time and penalties</string>
+    <string name="tie_legs">1st leg %1$s · 2nd leg %2$s</string>
+    <string name="tie_first_leg">1st leg %1$s</string>
+    <string name="tie_second_leg_tbd">2nd leg to be scheduled</string>
+    <string name="tie_projected">Projected matchup</string>
+    <string name="tie_dates_tbd">Dates to be confirmed</string>
+    <string name="liguilla_rules">Quarterfinals: 1st vs 8th, 2nd vs 7th, 3rd vs 6th and 4th vs 5th; in the semifinals the best-placed team still alive plays the worst. Every round has two legs, the better-placed team hosts the second one and advances on a level aggregate; a level final goes to extra time and penalties.</string>
 </resources>
