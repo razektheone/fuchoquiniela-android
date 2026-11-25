@@ -144,6 +144,9 @@ object FuchoApi {
     suspend fun standings(): StandingsResponse = send("GET", "standings")
     suspend fun simulator(): SimulatorResponse = send("GET", "simulator")
 
+    /** The Liguilla bracket; 404 when there's no Liga MX bracket to show. */
+    suspend fun liguilla(): LiguillaResponse = send("GET", "liguilla")
+
     /** `status`: upcoming (soonest first), results (latest first) or all. 30 per page. */
     suspend fun leagueMatches(status: String, page: Int): LeagueMatchesResponse =
         send("GET", "matches", query = mapOf("status" to status, "page" to page.toString()))

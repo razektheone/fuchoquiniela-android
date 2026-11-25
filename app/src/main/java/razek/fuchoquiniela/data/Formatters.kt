@@ -74,6 +74,9 @@ object DateText {
     fun long(instant: Instant): String =
         DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(AppLocale.locale()).format(instant.atZone(zone))
 
+    /** "26/11" (or "11/26" in English), for the Liguilla legs. */
+    fun dayMonth(instant: Instant): String = pattern("ddMM").format(instant.atZone(zone))
+
     /** "Cierra en 3 h" when kickoff (when picks lock) is less than a day away. */
     fun closesIn(context: Context, kickoff: Instant, now: Instant = Instant.now()): String? {
         val seconds = kickoff.epochSecond - now.epochSecond

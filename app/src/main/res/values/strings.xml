@@ -275,4 +275,20 @@
     <string name="simulator_soon">El simulador estará disponible cuando empiece el próximo torneo de Liga MX.</string>
     <string name="season_finished">Fase regular terminada</string>
     <string name="season_finished_message">Ya se jugaron todos los partidos. Revisa la tabla final.</string>
+
+    <!-- Liguilla bracket (Tabla) -->
+    <string name="liguilla">Liguilla</string>
+    <string name="liguilla_projection">Proyección: así quedarían los cruces si el torneo terminara hoy.</string>
+    <string name="champion">Campeón</string>
+    <string name="to_be_decided">Por definir</string>
+    <string name="tie_aggregate">Global %1$d-%2$d</string>
+    <string name="tie_by_position">Global %1$d-%2$d · avanza por posición</string>
+    <string name="tie_won_on_penalties">Global %1$d-%2$d, ganó en penales</string>
+    <string name="tie_to_penalties">Se define en tiempos extra y penales</string>
+    <string name="tie_legs">Ida %1$s · Vuelta %2$s</string>
+    <string name="tie_first_leg">Ida %1$s</string>
+    <string name="tie_second_leg_tbd">Vuelta por programar</string>
+    <string name="tie_projected">Cruce proyectado</string>
+    <string name="tie_dates_tbd">Fechas por confirmar</string>
+    <string name="liguilla_rules">Cuartos: 1° vs 8°, 2° vs 7°, 3° vs 6° y 4° vs 5°; en semifinales el mejor ubicado que sigue vivo enfrenta al peor. Todo es a ida y vuelta, el mejor ubicado cierra en casa y, con el global empatado, avanza; la final se define en tiempos extra y penales.</string>
 </resources>
